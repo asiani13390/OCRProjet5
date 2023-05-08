@@ -39,10 +39,11 @@ django-admin startproject OCR
 git commit -m "Installation de Django rest framework"
 
 ## Création de l'application dans le projet
-django-admin startapp app_p5
+cd OCRProjet5/OCR
+django-admin startapp p5
 
 ## Creation d'un commit GITHUB
-Nom du commit : Installation de Django rest framework
+git commit -m "Installation de l'application P5"
 
 ## Première initialisation de la base de données
 python manage.py migrate
@@ -62,6 +63,10 @@ Une page web avec une fusée préte au décollage apparait
 http://localhost:8000/admin/
 
 Pour cela utiliser le compte administrateur précédemment créé
+
+
+
+# Application
 
 
 
