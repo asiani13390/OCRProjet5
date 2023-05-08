@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
@@ -62,11 +63,11 @@ class Issues(models.Model):
 
 
 class Comments(models.Model):
-
-    comment_id = models.AutoField(primary_key=True)
+    comment_id = models.IntegerField(null = True)
     description = models.CharField(max_length=255)
     author_user_id = models.ForeignKey(Users, on_delete=models.CASCADE, default=1)
-    created_time = models.DateTimeField(auto_now_add=True)
+    issue_id = models.ForeignKey(Issues, on_delete=models.CASCADE, default=1)
+    created_time = models.DateTimeField(auto_now = True)
 
     class Meta:
         verbose_name_plural = "Comments"
