@@ -19,10 +19,6 @@ git remote add origin https://github.com/asiani13390/OCRProjet5.git
 git push -u origin main
 ```
 
-
-
-
-
 ## Creation de l'environnement virtuel python
 python -m venv env
 
@@ -40,7 +36,7 @@ pip install djangorestframework
 django-admin startproject OCR
 
 ## Creation d'un commit GITHUB
-Nom du commit : Installation de Django rest framework
+git commit -m "Installation de Django rest framework"
 
 ## Création de l'application dans le projet
 django-admin startapp app_p5
