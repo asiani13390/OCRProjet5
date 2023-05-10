@@ -22,7 +22,7 @@ class Projects(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     type = models.CharField(max_length=255)
-    author_user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='projects_author_user_id', default=1)
+    author_user = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='projects_author_user', default=1)
 
     class Meta:
         verbose_name_plural = "Projects"
