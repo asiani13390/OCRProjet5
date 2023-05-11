@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from p5.models import Projects
 
-class ProjectSerializer(ModelSerializer):
+class ProjectsSerializer(ModelSerializer):
 
     class Meta:
         model = Projects
