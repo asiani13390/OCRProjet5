@@ -17,7 +17,6 @@ class Projects(models.Model):
     type = models.CharField(max_length=255)
     contributors_id = models.ManyToManyField(User, through="Contributors", related_name='Projects_contributors')
     author_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects_author_user', default=1)
-    
 
     class Meta:
         # Le nom de la table dans l'interface d'administration Django sera 'Projects'
@@ -33,7 +32,7 @@ class Projects(models.Model):
 class Contributors(models.Model):
 
     # Valeur du champs - Champs visible
-    ROLES = (
+    PERMISSIONS = (
         ('admin', 'Administrator'),
         ('member', 'Member'),
         ('guest', 'Guest'),
@@ -41,12 +40,13 @@ class Contributors(models.Model):
 
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     project_id = models.ForeignKey('Projects', on_delete=models.CASCADE, related_name='contributors_projects_id')
-    role = models.CharField(max_length=255, choices=ROLES)
+    permissions = models.CharField(max_length=255, choices=PERMISSIONS)
+    role = models.CharField(max_length=255, null=True, blank=True, default='')
 
     class Meta:
         # Le nom de la table dans l'interface d'administration Django sera 'Contributors'
         verbose_name_plural = "Contributors"
-        # Eviter les doublons
+        # Eviter les doublons : Un user
         unique_together = ('user_id', 'project_id')
     
 #
@@ -59,8 +59,8 @@ class Issues(models.Model):
     priority = models.CharField(max_length=255)
     project_id = models.ForeignKey(Projects, on_delete=models.CASCADE, related_name='issues_project_id', default=1)
     status = models.CharField(max_length=255)
-    author_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issues_authored_issues', default=1)
-    assignee_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issues_assigned_issues', default=1)
+    author_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issues_author_user_id', default=1)
+    assignee_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issues_assigned_user_id', default=1)
     created_time = models.DateTimeField(auto_now_add=True) 
 
     class Meta:
@@ -73,8 +73,8 @@ class Issues(models.Model):
 # Creation du modele 'Comments'
 # 
 class Comments(models.Model):
-    comment_id = models.IntegerField(null = True)
-    description = models.CharField(max_length=255)
+    comment_id = models.AutoField(primary_key=True)
+    description = models.CharField(max_length=255) # ok
     author_user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     issue_id = models.ForeignKey(Issues, on_delete=models.CASCADE, default=1)
     created_time = models.DateTimeField(auto_now = True)
@@ -103,5 +103,49 @@ class UserAdmin(admin.ModelAdmin):
 
 class ProjectsAdmin(admin.ModelAdmin):
     inlines = [ContributorsInline]
+
+#[FIN] ##############################################################################
+
+
+###############################################################################
+# [DEBUT] Cette classes permet à l'interface d'administration Django
+# d'afficher en lecture seule :
+#
+# pour la table Comments, les champs created_time et comment_id
+#
+# Documenation django :
+# https://docs.djangoproject.com/en/dev/ref/contrib/admin/#django.contrib.admin.ModelAdmin.readonly_fields
+#
+class CommentsAdmin(admin.ModelAdmin):
+    readonly_fields = ('created_time', 'comment_id')
+
+#[FIN] ##############################################################################
+
+
+###############################################################################
+# [DEBUT] Cette classes permet à l'interface d'administration Django
+# d'afficher en lecture seule :
+#
+# pour la table Issues, le champs created_time
+#
+# Documenation django :
+# https://docs.djangoproject.com/en/dev/ref/contrib/admin/#django.contrib.admin.ModelAdmin.readonly_fields
+#
+class IssuesAdmin(admin.ModelAdmin):
+    readonly_fields = ('created_time', )
+
+#[FIN] ##############################################################################
+
+###############################################################################
+# [DEBUT] Cette classes permet à l'interface d'administration Django
+# d'afficher en lecture seule :
+#
+# pour la table Projects, le champs 
+#
+# Documenation django :
+# https://docs.djangoproject.com/en/dev/ref/contrib/admin/#django.contrib.admin.ModelAdmin.readonly_fields
+#
+class ProjectsAdmin(admin.ModelAdmin):
+    readonly_fields = ('project_id', )
 
 #[FIN] ##############################################################################
