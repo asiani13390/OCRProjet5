@@ -7,6 +7,7 @@ from django.contrib import admin
 #
 User = get_user_model()
 
+
 #
 # Creation du modele 'Projects'
 #
@@ -48,7 +49,8 @@ class Contributors(models.Model):
         verbose_name_plural = "Contributors"
         # Eviter les doublons : Un user
         unique_together = ('user_id', 'project_id')
-    
+
+
 #
 # Creation du modele 'Issues'
 # 
@@ -69,12 +71,13 @@ class Issues(models.Model):
     def __str__(self):
         return self.title
 
+
 #
 # Creation du modele 'Comments'
 # 
 class Comments(models.Model):
     comment_id = models.AutoField(primary_key=True)
-    description = models.CharField(max_length=255) # ok
+    description = models.CharField(max_length=255)
     author_user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     issue_id = models.ForeignKey(Issues, on_delete=models.CASCADE, default=1)
     created_time = models.DateTimeField(auto_now = True)
@@ -97,6 +100,7 @@ class ContributorsInline(admin.TabularInline):
     model = Contributors
     extra = 1
 
+
 class UserAdmin(admin.ModelAdmin):
     inlines = [ContributorsInline]
 
@@ -109,7 +113,7 @@ class ProjectsAdmin(admin.ModelAdmin):
 
 ###############################################################################
 # [DEBUT] Cette classes permet à l'interface d'administration Django
-# d'afficher en lecture seule :
+# d'afficher les champs cachés en mode lecture seule :
 #
 # pour la table Comments, les champs created_time et comment_id
 #
