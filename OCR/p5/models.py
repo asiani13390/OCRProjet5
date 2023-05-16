@@ -96,6 +96,10 @@ class Comments(models.Model):
 # Documentation Django
 # https://docs.djangoproject.com/en/dev/ref/contrib/admin/#working-with-many-to-many-intermediary-models
 #
+# Et: Afficher en lecture seule le champs project_id :
+# Documentation Django
+# https://docs.djangoproject.com/en/dev/ref/contrib/admin/#django.contrib.admin.ModelAdmin.readonly_fields
+#
 class ContributorsInline(admin.TabularInline):
     model = Contributors
     extra = 1
@@ -106,6 +110,7 @@ class UserAdmin(admin.ModelAdmin):
 
 
 class ProjectsAdmin(admin.ModelAdmin):
+    readonly_fields = ('project_id', )
     inlines = [ContributorsInline]
 
 #[FIN] ##############################################################################
@@ -137,19 +142,5 @@ class CommentsAdmin(admin.ModelAdmin):
 #
 class IssuesAdmin(admin.ModelAdmin):
     readonly_fields = ('created_time', )
-
-#[FIN] ##############################################################################
-
-###############################################################################
-# [DEBUT] Cette classes permet à l'interface d'administration Django
-# d'afficher en lecture seule :
-#
-# pour la table Projects, le champs 
-#
-# Documenation django :
-# https://docs.djangoproject.com/en/dev/ref/contrib/admin/#django.contrib.admin.ModelAdmin.readonly_fields
-#
-class ProjectsAdmin(admin.ModelAdmin):
-    readonly_fields = ('project_id', )
 
 #[FIN] ##############################################################################

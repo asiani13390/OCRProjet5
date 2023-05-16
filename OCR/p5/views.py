@@ -2,6 +2,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 from p5.serializers import UserSerializer, GroupSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 from rest_framework.viewsets import ModelViewSet
@@ -9,19 +10,34 @@ from django.http import HttpResponse
 from p5.models import Projects
 from p5.serializers import ProjectsSerializer
 
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 # Create your views here.
 
 def index(request):
     return HttpResponse("Welcome to Openclassrooms project 5.")
 
 
+#class ProjectsViewset(ModelViewSet):
+#
+#    serializer_class = ProjectsSerializer
+#    permission_classes = [IsAuthenticated]
+#
+#    def get_queryset(self):
+#        return Projects.objects.all()
+
 class ProjectsViewset(ModelViewSet):
 
     serializer_class = ProjectsSerializer
+    permission_classes = [IsAuthenticated]
+
 
     def get_queryset(self):
-        return Projects.objects.all()
+        authentication = JWTAuthentication()
+        user, token = authentication.authenticate(self.request)
 
+        queryset = Projects.objects.filter(author_user_id=user.id)
+        return queryset
 
 class UserViewSet(viewsets.ModelViewSet):
     """
