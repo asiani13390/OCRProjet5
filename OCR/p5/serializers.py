@@ -6,7 +6,7 @@ from p5.models import Projects
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
+        fields = ['url', 'username', 'email', 'groups','last_name','first_name']
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
