@@ -5,7 +5,6 @@ from p5.models import Project
 from django.contrib.auth.models import User 
 
 
-
 class ProjectSerializer(ModelSerializer):
 
     class Meta:
@@ -21,7 +20,7 @@ class SignupSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = (  'first_name', 'last_name', 'email', 'username', 'password')
+        fields = ('first_name', 'last_name', 'email', 'username', 'password')
 
     def validate(self, args):
         email = args.get("email", None)

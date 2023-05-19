@@ -18,8 +18,8 @@ class ProjectsViewset(ModelViewSet):
     #permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        #authentication = JWTAuthentication()
-        #user, token = authentication.authenticate(self.request)
+        authentication = JWTAuthentication()
+        user, token = authentication.authenticate(self.request)
 
         queryset = Project.objects.all()
         return queryset
@@ -28,6 +28,8 @@ class ProjectsViewset(ModelViewSet):
 class SignupAPIView(generics.GenericAPIView):
 
     serializer_class = SignupSerializer
+
+    # Par défaut toutes les pages sont protégées par l'authentification par défaut du fichier settings.py
     permission_classes = [AllowOnlyPostWithoutAuthentication]
 
     # Eviter l'erreur : 'SignupAPIView' should either include a `queryset` attribute, or override the `get_queryset()` method.
@@ -40,8 +42,6 @@ class SignupAPIView(generics.GenericAPIView):
         if (serializer.is_valid()):
             serializer.save()
             return Response(    {
-                                    "RequestId" : str(uuid.uuid4()),
-                                    "Message" : "Create user successfuly",
                                     "User" : serializer.data 
                                 },
                                 status=status.HTTP_201_CREATED )
