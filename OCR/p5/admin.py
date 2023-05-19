@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Contributors
 from .models import Projects
-from .models import Issues
+from .models import Issue
 from .models import Comment
 
 ###############################################################################
@@ -30,12 +30,12 @@ class ProjectsAdmin(admin.ModelAdmin):
 
 
 
-class IssuesAdmin(admin.ModelAdmin):
+class IssueAdmin(admin.ModelAdmin):
     readonly_fields = ('created_time', )
 
 #[FIN] ##############################################################################
 
 admin.site.register(Contributors)
-admin.site.register(Issues, IssuesAdmin)
+admin.site.register(Issue, IssueAdmin)
 admin.site.register(Projects, ProjectsAdmin)
 admin.site.register(Comment)
