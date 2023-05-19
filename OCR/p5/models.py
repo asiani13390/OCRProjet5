@@ -60,7 +60,7 @@ class Issue(models.Model):
     desc = models.CharField(max_length=255)
     tag = models.CharField(max_length=255)
     priority = models.CharField(max_length=255)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='issue_project', default=1)
+    #project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='issue_project', default=1)
     status = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issue_author', default=1)
     assignee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issue_assignee', default=1)
