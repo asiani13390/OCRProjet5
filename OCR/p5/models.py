@@ -16,8 +16,8 @@ class Projects(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     type = models.CharField(max_length=255)
-    contributors_id = models.ManyToManyField(User, through="Contributors", related_name='Project_contributors')
-    author_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='project_author', default=1)
+    contributors = models.ManyToManyField(User, through="Contributors", related_name='Project_contributors')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='project_author', default=1)
 
     class Meta:
         # Le nom de la table dans l'interface d'administration Django sera 'Projects'
