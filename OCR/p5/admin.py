@@ -29,9 +29,6 @@ class ProjectsAdmin(admin.ModelAdmin):
     inlines = [ContributorsInline]
 
 
-class CommentsAdmin(admin.ModelAdmin):
-    readonly_fields = ('created_time', 'comment_id')
-
 
 class IssuesAdmin(admin.ModelAdmin):
     readonly_fields = ('created_time', )
@@ -41,4 +38,4 @@ class IssuesAdmin(admin.ModelAdmin):
 admin.site.register(Contributors)
 admin.site.register(Issues, IssuesAdmin)
 admin.site.register(Projects, ProjectsAdmin)
-admin.site.register(Comment, CommentsAdmin)
+admin.site.register(Comment)

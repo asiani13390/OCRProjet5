@@ -76,10 +76,9 @@ class Issues(models.Model):
 # Creation du modele 'Comment'
 # 
 class Comment(models.Model):
-    comment_id = models.AutoField(primary_key=True)
     description = models.CharField(max_length=255)
-    author_user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    issue_id = models.ForeignKey(Issues, on_delete=models.CASCADE, default=1)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    issue = models.ForeignKey(Issues, on_delete=models.CASCADE, default=1)
     created_time = models.DateTimeField(auto_now = True)
 
     class Meta:
@@ -87,5 +86,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.description
-
-
