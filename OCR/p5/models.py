@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.contrib import admin
+
 
 #
 # Obtention du modele 'User' utilisé par Django
@@ -73,9 +73,9 @@ class Issues(models.Model):
 
 
 #
-# Creation du modele 'Comments'
+# Creation du modele 'Comment'
 # 
-class Comments(models.Model):
+class Comment(models.Model):
     comment_id = models.AutoField(primary_key=True)
     description = models.CharField(max_length=255)
     author_user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=1)

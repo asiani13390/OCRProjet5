@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Contributors
 from .models import Projects
 from .models import Issues
-from .models import Comments
+from .models import Comment
 
 ###############################################################################
 # [DEBUT] Ces classes permettent à l'interface d'administration Django 
@@ -41,4 +41,4 @@ class IssuesAdmin(admin.ModelAdmin):
 admin.site.register(Contributors)
 admin.site.register(Issues, IssuesAdmin)
 admin.site.register(Projects, ProjectsAdmin)
-admin.site.register(Comments, CommentsAdmin)
+admin.site.register(Comment, CommentsAdmin)
