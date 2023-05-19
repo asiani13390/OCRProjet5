@@ -15,11 +15,11 @@ from p5.serializers import ProjectSerializer, SignupSerializer
 class ProjectsViewset(ModelViewSet):
 
     serializer_class = ProjectSerializer
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        authentication = JWTAuthentication()
-        user, token = authentication.authenticate(self.request)
+        #        authentication = JWTAuthentication()
+        #        user, token = authentication.authenticate(self.request)
 
         queryset = Project.objects.all()
         return queryset
