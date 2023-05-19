@@ -18,6 +18,6 @@ class ProjectsSerializer(ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ('project_id', 'title', 'description', 'type', 'author_user_id')
+        fields = ('title', 'description', 'type', 'author_user_id')
         
         
