@@ -59,10 +59,10 @@ class Issues(models.Model):
     desc = models.CharField(max_length=255)
     tag = models.CharField(max_length=255)
     priority = models.CharField(max_length=255)
-    project_id = models.ForeignKey(Projects, on_delete=models.CASCADE, related_name='issues_project_id', default=1)
+    project_id = models.ForeignKey(Projects, on_delete=models.CASCADE, related_name='issue_project', default=1)
     status = models.CharField(max_length=255)
-    author_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issues_author_user_id', default=1)
-    assignee_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issues_assigned_user_id', default=1)
+    author_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issue_author', default=1)
+    assignee_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issue_assigned', default=1)
     created_time = models.DateTimeField(auto_now_add=True) 
 
     class Meta:
