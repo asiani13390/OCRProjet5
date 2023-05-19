@@ -16,7 +16,7 @@ class Projects(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     type = models.CharField(max_length=255)
-    contributors = models.ManyToManyField(User, through="Contributors", related_name='Project_contributors')
+    contributors = models.ManyToManyField(User, through="Contributor", related_name='Project_contributors')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='project_author', default=1)
 
     class Meta:
@@ -28,9 +28,9 @@ class Projects(models.Model):
 
 
 #
-# Creation du modele pour la table de jointure entre User et Projects 'Contributors'
+# Creation du modele pour la table de jointure entre User et Projects 'Contributor'
 #
-class Contributors(models.Model):
+class Contributor(models.Model):
 
     # Valeur du champs - Champs visible
     PERMISSIONS = (
@@ -39,8 +39,8 @@ class Contributors(models.Model):
         ('guest', 'Guest'),
     )
 
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    project_id = models.ForeignKey('Projects', on_delete=models.CASCADE, related_name='contributors_project')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey('Projects', on_delete=models.CASCADE, related_name='contributors_project')
 
     permissions = models.CharField(max_length=255, choices=PERMISSIONS)
     role = models.CharField(max_length=255, null=True, blank=True, default='')

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contributors
+from .models import Contributor
 from .models import Projects
 from .models import Issue
 from .models import Comment
@@ -16,7 +16,7 @@ from .models import Comment
 # https://docs.djangoproject.com/en/dev/ref/contrib/admin/#django.contrib.admin.ModelAdmin.readonly_fields
 #
 class ContributorsInline(admin.TabularInline):
-    model = Contributors
+    model = Contributor
     extra = 1
 
 
@@ -24,18 +24,12 @@ class UserAdmin(admin.ModelAdmin):
     inlines = [ContributorsInline]
 
 
-class ProjectsAdmin(admin.ModelAdmin):
-    readonly_fields = ('project_id', )
-    inlines = [ContributorsInline]
-
-
-
 class IssueAdmin(admin.ModelAdmin):
     readonly_fields = ('created_time', )
 
 #[FIN] ##############################################################################
 
-admin.site.register(Contributors)
+admin.site.register(Contributor)
 admin.site.register(Issue, IssueAdmin)
-admin.site.register(Projects, ProjectsAdmin)
+admin.site.register(Projects)
 admin.site.register(Comment)
