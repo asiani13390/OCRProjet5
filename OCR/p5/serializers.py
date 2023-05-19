@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from p5.models import Projects
+from p5.models import Project
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -17,7 +17,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class ProjectsSerializer(ModelSerializer):
 
     class Meta:
-        model = Projects
+        model = Project
         fields = ('project_id', 'title', 'description', 'type', 'author_user_id')
         
         

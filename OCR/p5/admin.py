@@ -1,12 +1,12 @@
 from django.contrib import admin
 from .models import Contributor
-from .models import Projects
+from .models import Project
 from .models import Issue
 from .models import Comment
 
 ###############################################################################
 # [DEBUT] Ces classes permettent à l'interface d'administration Django 
-# d'afficher le champs many to many 'contributors_id' de la classe 'Projects'
+# d'afficher le champs many to many 'contributors_id' de la classe 'Project'
 #
 # Documentation Django
 # https://docs.djangoproject.com/en/dev/ref/contrib/admin/#working-with-many-to-many-intermediary-models
@@ -31,5 +31,5 @@ class IssueAdmin(admin.ModelAdmin):
 
 admin.site.register(Contributor)
 admin.site.register(Issue, IssueAdmin)
-admin.site.register(Projects)
+admin.site.register(Project)
 admin.site.register(Comment)

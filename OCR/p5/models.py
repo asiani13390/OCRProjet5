@@ -9,9 +9,9 @@ User = get_user_model()
 
 
 #
-# Creation du modele 'Projects'
+# Creation du modele 'Project'
 #
-class Projects(models.Model):
+class Project(models.Model):
     project_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
@@ -20,7 +20,7 @@ class Projects(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='project_author', default=1)
 
     class Meta:
-        # Le nom de la table dans l'interface d'administration Django sera 'Projects'
+        # Le nom de la table dans l'interface d'administration Django sera 'Project'
         verbose_name_plural = "Projects"
 
     def __str__(self):
@@ -28,7 +28,7 @@ class Projects(models.Model):
 
 
 #
-# Creation du modele pour la table de jointure entre User et Projects 'Contributor'
+# Creation du modele pour la table de jointure entre User et Project 'Contributor'
 #
 class Contributor(models.Model):
 
@@ -40,7 +40,7 @@ class Contributor(models.Model):
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    project = models.ForeignKey('Projects', on_delete=models.CASCADE, related_name='contributors_project')
+    project = models.ForeignKey('Project', on_delete=models.CASCADE, related_name='contributors_project')
 
     permissions = models.CharField(max_length=255, choices=PERMISSIONS)
     role = models.CharField(max_length=255, null=True, blank=True, default='')
@@ -60,7 +60,7 @@ class Issue(models.Model):
     desc = models.CharField(max_length=255)
     tag = models.CharField(max_length=255)
     priority = models.CharField(max_length=255)
-    project = models.ForeignKey(Projects, on_delete=models.CASCADE, related_name='issue_project', default=1)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='issue_project', default=1)
     status = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issue_author', default=1)
     assignee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issue_assignee', default=1)

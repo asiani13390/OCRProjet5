@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework.viewsets import ModelViewSet
 from django.http import HttpResponse
-from p5.models import Projects
+from p5.models import Project
 from p5.serializers import ProjectsSerializer
 
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -25,7 +25,7 @@ class ProjectsViewset(ModelViewSet):
         authentication = JWTAuthentication()
         user, token = authentication.authenticate(self.request)
         #queryset = Projects.objects.all()
-        queryset = Projects.objects.filter(author_user_id=user.id)
+        queryset = Project.objects.filter(author_user_id=user.id)
         return queryset
 
 class UserViewSet(viewsets.ModelViewSet):
