@@ -40,7 +40,7 @@ class Contributors(models.Model):
     )
 
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    project_id = models.ForeignKey('Projects', on_delete=models.CASCADE, related_name='contributors_projects_id')
+    project_id = models.ForeignKey('Projects', on_delete=models.CASCADE, related_name='contributors_project')
 
     permissions = models.CharField(max_length=255, choices=PERMISSIONS)
     role = models.CharField(max_length=255, null=True, blank=True, default='')
@@ -49,7 +49,7 @@ class Contributors(models.Model):
         # Le nom de la table dans l'interface d'administration Django sera 'Contributors'
         verbose_name_plural = "Contributors"
         # Eviter les doublons : Un user
-        unique_together = ('user_id', 'project_id')
+        #unique_together = ('user_id', 'project_id')
 
 
 #
