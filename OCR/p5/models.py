@@ -16,8 +16,8 @@ class Projects(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     type = models.CharField(max_length=255)
-    contributors_id = models.ManyToManyField(User, through="Contributors", related_name='Projects_contributors')
-    author_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects_author_user', default=1)
+    contributors_id = models.ManyToManyField(User, through="Contributors", related_name='Project_contributors')
+    author_user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='project_author', default=1)
 
     class Meta:
         # Le nom de la table dans l'interface d'administration Django sera 'Projects'
@@ -41,6 +41,7 @@ class Contributors(models.Model):
 
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     project_id = models.ForeignKey('Projects', on_delete=models.CASCADE, related_name='contributors_projects_id')
+
     permissions = models.CharField(max_length=255, choices=PERMISSIONS)
     role = models.CharField(max_length=255, null=True, blank=True, default='')
 
