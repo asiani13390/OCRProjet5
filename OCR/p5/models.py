@@ -15,7 +15,7 @@ class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     type = models.CharField(max_length=255)
-    #contributors = models.ManyToManyField(User, through="Contributor", related_name='Project_contributors')
+    contributors = models.ManyToManyField(User, through="Contributor", related_name='Project_contributors')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='project_author', default=1)
 
     class Meta:
@@ -39,7 +39,7 @@ class Contributor(models.Model):
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    #project = models.ForeignKey('Project', on_delete=models.CASCADE, related_name='contributors_project')
+    project = models.ForeignKey('Project', on_delete=models.CASCADE, related_name='contributors_project')
 
     permissions = models.CharField(max_length=255, choices=PERMISSIONS)
     role = models.CharField(max_length=255, null=True, blank=True, default='')

@@ -27,9 +27,13 @@ class UserAdmin(admin.ModelAdmin):
 class IssueAdmin(admin.ModelAdmin):
     readonly_fields = ('created_time', )
 
+
+class ProjectAdmin(admin.ModelAdmin):
+    inlines = [ContributorsInline]
+
 #[FIN] ##############################################################################
 
 admin.site.register(Contributor)
 admin.site.register(Issue, IssueAdmin)
-admin.site.register(Project)
+admin.site.register(Project, ProjectAdmin)
 admin.site.register(Comment)
