@@ -1,12 +1,5 @@
-from django.contrib.auth import get_user_model
 from django.db import models
 from django.contrib.auth.models import User 
-
-
-#
-# Obtention du modele 'User' utilisé par Django
-#
-#User = get_user_model()
 
 
 #
@@ -48,8 +41,9 @@ class Contributor(models.Model):
     class Meta:
         # Le nom de la table dans l'interface d'administration Django sera 'Contributors'
         verbose_name_plural = "Contributors"
-        # Eviter les doublons : Un user
-        #unique_together = ('user_id', 'project_id')
+        
+        # Limiter un utilisateur à un seul role dans le projet
+        unique_together = ('user', 'project')
 
 
 #
