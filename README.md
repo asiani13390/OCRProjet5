@@ -1,3 +1,5 @@
+Old version of softdesk project - Do not use - not finished
+
 # OCRProjet5
 
 ## Creation du dossier projet
